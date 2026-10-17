@@ -21,7 +21,7 @@ jobs:
           echo "--- available platforms ---"
           "$SDKMANAGER" --list 2>/dev/null | grep -E "platforms;android-[0-9]+ " | tail -8
           echo "--- install 37 ---"
-          "$SDKMANAGER" "platforms;android-37" "platform-tools" 2>&1 | tail -30
+          "$SDKMANAGER" --channel=3 "platforms;android-37" "platform-tools" 2>&1 | tail -30
       - uses: gradle/actions/setup-gradle@v4
       - name: Build debug APK
         run: chmod +x ./gradlew && ./gradlew assembleDebug --stacktrace
