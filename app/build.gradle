@@ -13,12 +13,12 @@ rootProject.file('local.properties').withInputStream {
 android {
     namespace = 'com.fongmi.android.tv'
 
-    compileSdk libs.versions.compileSdk.get().toInteger()
+    compileSdk 37
 
     defaultConfig {
         applicationId "com.fongmi.android.tv"
-        minSdk libs.versions.minSdk.get().toInteger()
-        targetSdk libs.versions.targetSdk.get().toInteger()
+        minSdk 24
+        targetSdk 37
         versionCode 563
         versionName "5.6.3"
         javaCompileOptions {

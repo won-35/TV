@@ -18,8 +18,8 @@ jobs:
           SDKMANAGER=$(find /usr/local/lib/android /opt/android "${ANDROID_HOME}" -maxdepth 4 -name sdkmanager -type f 2>/dev/null | head -1)
           echo "sdkmanager: $SDKMANAGER"
           yes | "$SDKMANAGER" --licenses > /dev/null || true
-          echo "--- installed ---"
-          "$SDKMANAGER" --list_installed 2>&1 | head -20
+          echo "--- available platforms ---"
+          "$SDKMANAGER" --list 2>/dev/null | grep -E "platforms;android-[0-9]+ " | tail -8
           echo "--- install 37 ---"
           "$SDKMANAGER" "platforms;android-37" "platform-tools" 2>&1 | tail -30
       - uses: gradle/actions/setup-gradle@v4
