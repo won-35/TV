@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.os.HandlerCompat;
 
+import com.fongmi.android.tv.bean.Config;
 import com.fongmi.android.tv.utils.Notify;
 import com.fongmi.hook.Hook;
 import com.github.catvod.Init;
@@ -81,8 +82,18 @@ public class App extends Application implements Application.ActivityLifecycleCal
     @Override
     public void onCreate() {
         super.onCreate();
+        initDefaultConfig();
         Notify.createChannel();
         registerActivityLifecycleCallbacks(this);
+    }
+
+    /** 首次启动注入默认点播仓（已有配置则不干预用户选择） */
+    private void initDefaultConfig() {
+        try {
+            if (!Config.vod().isEmpty()) return;
+            Config.find("http://192.168.3.220:8899/tvbox/depot.json", "Yeah仓", 0).update();
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
